@@ -62,6 +62,26 @@ class Base
 
     protected $phpVersion = 8;
 
+    // Declared explicitly: dynamic properties are deprecated since PHP 8.2.
+    // Subclasses may redeclare these with defaults (same or wider visibility).
+    protected $transactionBase = [];
+
+    protected $returnData = [];
+
+    protected $request = [];
+
+    public $content;
+
+    public $result;
+
+    public $curlInfo;
+
+    public $confirmContent;
+
+    public $signature;
+
+    public $notificationFormated;
+
     /**
      * Constructor
      *
