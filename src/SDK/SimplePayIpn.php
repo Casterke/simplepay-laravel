@@ -40,25 +40,7 @@ class SimplePayIpn extends Base
      */
     public function isIpnSignatureCheck($content = '')
     {
-        if (! function_exists('getallheaders')) {
-            /**
-             * Getallheaders fon Nginx
-             *
-             * @return header
-             */
-            function getallheaders()
-            {
-                $headers = [];
-                foreach ($_SERVER as $name => $value) {
-                    if (substr($name, 0, 5) === 'HTTP_') {
-                        $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-                    }
-                }
-
-                return $headers;
-            }
-        }
-        $signature = $this->getSignatureFromHeader(getallheaders());
+        $signature = $this->getSignatureFromHeader($this->requestHeaders());
 
         foreach (json_decode($this->checkOrSetToJson($content)) as $key => $value) {
             $this->ipnContent[$key] = $value;
@@ -102,6 +84,27 @@ class SimplePayIpn extends Base
         $this->writeLog(['confirmSignature' => $this->signature, 'confirmContent' => $this->confirmContent]);
 
         return $this->validationResult;
+    }
+
+    /**
+     * Request headers; falls back to $_SERVER where getallheaders() is unavailable (CLI, some nginx setups).
+     * Previously declared a namespaced getallheaders() inline, which fatals on the second call in one process.
+     *
+     * @return array
+     */
+    private function requestHeaders()
+    {
+        if (function_exists('getallheaders')) {
+            return \getallheaders();
+        }
+        $headers = [];
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) === 'HTTP_') {
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+            }
+        }
+
+        return $headers;
     }
 
     /**

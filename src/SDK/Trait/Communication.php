@@ -52,7 +52,9 @@ trait Communication
         } catch (Exception $e) {
             $this->logContent['runCommunicationException'] = $e->getMessage();
         }
-        curl_close($curlData);
+        if (PHP_VERSION_ID < 80000) {
+            curl_close($curlData); // no-op since PHP 8.0, deprecated in 8.5
+        }
 
         return $result;
     }
