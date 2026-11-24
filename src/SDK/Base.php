@@ -152,7 +152,7 @@ class Base
      */
     public function addGroupData($group = '', $key = '', $value = '')
     {
-        if (! isset($this->transactionBase[$group])) {
+        if (!isset($this->transactionBase[$group])) {
             $this->transactionBase[$group] = [];
         }
         $this->transactionBase[$group][$key] = $value;
@@ -175,7 +175,7 @@ class Base
             'tax' => 0,
         ];
 
-        if (! isset($this->transactionBase['items'])) {
+        if (!isset($this->transactionBase['items'])) {
             $this->transactionBase['items'] = [];
         }
 
@@ -345,7 +345,7 @@ class Base
                 foreach ($subArray as $subKey => $subValue) {
                     $return[$key . '_' . $subKey] = $subValue;
                 }
-            } elseif (! is_array($value)) {
+            } elseif (!is_array($value)) {
                 $return[$key] = $value;
             }
         }

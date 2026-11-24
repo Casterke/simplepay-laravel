@@ -59,7 +59,7 @@ trait Signature
         $this->logContent['computedSignature'] = $this->config['computedSignature'];
         try {
             if ($this->phpVersion >= 7) {
-                if (! hash_equals($this->config['computedSignature'], $signatureToCheck)) {
+                if (!hash_equals($this->config['computedSignature'], $signatureToCheck)) {
                     throw new Exception('fail');
                 }
             } elseif ($this->phpVersion < 7) {

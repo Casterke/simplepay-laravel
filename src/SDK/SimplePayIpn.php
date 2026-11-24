@@ -65,13 +65,13 @@ class SimplePayIpn extends Base
         }
         $this->logContent['validationResult'] = $this->validationResult;
 
-        if (! $this->validationResult) {
+        if (!$this->validationResult) {
             $this->logContent['validationResultMessage'] = 'UNSUCCESSFUL VALIDATION, NO CONFIRMATION';
         }
         $this->writeLog($this->logContent);
 
         //confirm setup
-        if (! $this->validationResult) {
+        if (!$this->validationResult) {
             $this->confirmContent = 'UNSUCCESSFUL VALIDATION';
             $this->signature = 'UNSUCCESSFUL VALIDATION';
         } elseif ($this->validationResult) {

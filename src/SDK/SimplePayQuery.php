@@ -33,7 +33,7 @@ class SimplePayQuery extends Base
      */
     public function addSimplePayId($simplePayId = '')
     {
-        if (! isset($this->transactionBase['transactionIds']) || count($this->transactionBase['transactionIds']) === 0) {
+        if (!isset($this->transactionBase['transactionIds']) || count($this->transactionBase['transactionIds']) === 0) {
             $this->logTransactionId = $simplePayId;
         }
         $this->transactionBase['transactionIds'][] = $simplePayId;
@@ -47,7 +47,7 @@ class SimplePayQuery extends Base
      */
     public function addMerchantOrderId($merchantOrderId = '')
     {
-        if (! isset($this->transactionBase['orderRefs']) || count($this->transactionBase['orderRefs']) === 0) {
+        if (!isset($this->transactionBase['orderRefs']) || count($this->transactionBase['orderRefs']) === 0) {
             $this->logOrderRef = $merchantOrderId;
         }
         $this->transactionBase['orderRefs'][] = $merchantOrderId;

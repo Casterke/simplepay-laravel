@@ -26,7 +26,7 @@ trait Logger
      */
     public function writeLog($log = [])
     {
-        if (! $this->config['logger']) {
+        if (!$this->config['logger']) {
             return false;
         }
 
@@ -39,12 +39,12 @@ trait Logger
         $logFile = storage_path('logs/simplepay') . '/' . @date('Ymd', time()) . '.log';
 
         try {
-            if (! is_writable(storage_path('logs/simplepay'))) {
+            if (!is_writable(storage_path('logs/simplepay'))) {
                 $write = false;
                 throw new Exception('Folder is not writable: ' . storage_path('logs/simplepay'));
             }
             if (file_exists($logFile)) {
-                if (! is_writable($logFile)) {
+                if (!is_writable($logFile)) {
                     $write = false;
                     throw new Exception('File is not writable: ' . $logFile);
                 }
@@ -116,7 +116,7 @@ trait Logger
     protected function logToFile($logFile = '', $logText = '')
     {
         try {
-            if (! file_put_contents($logFile, $logText, FILE_APPEND | LOCK_EX)) {
+            if (!file_put_contents($logFile, $logText, FILE_APPEND | LOCK_EX)) {
                 throw new Exception('Log write error');
             }
         } catch (Exception $e) {

@@ -4,3 +4,4 @@ vendor
 .env
 .php_cs.cache
 *DS_Store
+.php-cs-fixer.cache
