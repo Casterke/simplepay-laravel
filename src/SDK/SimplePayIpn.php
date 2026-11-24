@@ -87,27 +87,6 @@ class SimplePayIpn extends Base
     }
 
     /**
-     * Request headers; falls back to $_SERVER where getallheaders() is unavailable (CLI, some nginx setups).
-     * Previously declared a namespaced getallheaders() inline, which fatals on the second call in one process.
-     *
-     * @return array
-     */
-    private function requestHeaders()
-    {
-        if (function_exists('getallheaders')) {
-            return \getallheaders();
-        }
-        $headers = [];
-        foreach ($_SERVER as $name => $value) {
-            if (substr($name, 0, 5) === 'HTTP_') {
-                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-            }
-        }
-
-        return $headers;
-    }
-
-    /**
      * Immediate IPN confirmation
      *
      * @return bool
@@ -139,5 +118,26 @@ class SimplePayIpn extends Base
         $this->writeLog(['ipnConfirm' => 'ipnReturnData provided as content by getIpnConfirmContent']);
 
         return $this->ipnReturnData;
+    }
+
+    /**
+     * Request headers; falls back to $_SERVER where getallheaders() is unavailable (CLI, some nginx setups).
+     * Previously declared a namespaced getallheaders() inline, which fatals on the second call in one process.
+     *
+     * @return array
+     */
+    private function requestHeaders()
+    {
+        if (function_exists('getallheaders')) {
+            return \getallheaders();
+        }
+        $headers = [];
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) === 'HTTP_') {
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+            }
+        }
+
+        return $headers;
     }
 }

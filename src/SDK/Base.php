@@ -36,6 +36,18 @@ class Base
 
     public $logPath = '';
 
+    public $content;
+
+    public $result;
+
+    public $curlInfo;
+
+    public $confirmContent;
+
+    public $signature;
+
+    public $notificationFormated;
+
     protected $headers = [];
 
     protected $hashAlgo = 'sha384';
@@ -69,18 +81,6 @@ class Base
     protected $returnData = [];
 
     protected $request = [];
-
-    public $content;
-
-    public $result;
-
-    public $curlInfo;
-
-    public $confirmContent;
-
-    public $signature;
-
-    public $notificationFormated;
 
     /**
      * Constructor
